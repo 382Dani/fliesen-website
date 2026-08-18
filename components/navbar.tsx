@@ -14,6 +14,7 @@ const navLinks = [
   { href: '/team', label: 'Team' },
   { href: '#oeffnungszeiten', label: 'Öffnungszeiten' },
   { href: '#kontakt', label: 'Kontakt' },
+  { href: '/termin', label: 'Termin buchen' },
 ]
 
 interface NavbarProps {
