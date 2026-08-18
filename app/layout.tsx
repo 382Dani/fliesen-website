@@ -2,7 +2,6 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Lato, Playfair_Display } from 'next/font/google'
 import './globals.css'
-import ChatWidget from '@/components/salon-chat'
 
 const lato = Lato({
   subsets: ['latin'],
@@ -38,7 +37,6 @@ export default function RootLayout({
     <html lang="de" className={`${lato.variable} ${playfair.variable} bg-background`} data-scroll-behavior="smooth">
       <body className="antialiased font-sans">
         {children}
-        <ChatWidget />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
