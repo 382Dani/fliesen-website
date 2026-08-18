@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
-import TerminModal from './termin-modal'
+import { Menu, X, Scissors } from 'lucide-react'
 
 const navLinks = [
   { href: '#leistungen', label: 'Leistungen' },
@@ -14,14 +13,9 @@ const navLinks = [
   { href: '/team', label: 'Team' },
   { href: '#oeffnungszeiten', label: 'Öffnungszeiten' },
   { href: '#kontakt', label: 'Kontakt' },
-  { href: '/termin', label: 'Termin buchen' },
 ]
 
-interface NavbarProps {
-  onOpenTermin?: () => void
-}
-
-export default function Navbar({ onOpenTermin }: NavbarProps) {
+export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('')
@@ -80,18 +74,26 @@ export default function Navbar({ onOpenTermin }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-background/98 backdrop-blur-md border-b border-border shadow-sm h-14'
-          : 'bg-background/95 backdrop-blur-sm border-b border-border h-16'
+          ? 'bg-background/98 backdrop-blur-md border-b border-border shadow-sm h-16'
+          : 'bg-background/95 backdrop-blur-sm border-b border-border/60 h-20'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-full">
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-full gap-6">
         {/* Logo */}
-        <Link href="/" className="font-serif text-xl font-semibold text-primary tracking-wide flex-shrink-0">
-          Flek die Friseure
+        <Link
+          href="/"
+          className="group flex items-center gap-2.5 flex-shrink-0 rounded-sm border border-primary/25 bg-primary/[0.06] px-3.5 py-2 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 group-hover:scale-105">
+            <Scissors size={15} strokeWidth={2.25} aria-hidden="true" />
+          </span>
+          <span className="font-serif text-lg font-semibold text-foreground tracking-wide leading-none">
+            Flek die Friseure
+          </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Hauptnavigation">
+        <nav className="hidden md:flex items-center gap-5 lg:gap-7 ml-auto" aria-label="Hauptnavigation">
           {navLinks.map((link) => {
             const isAnchor = link.href.startsWith('#')
             const inner = (
@@ -123,12 +125,17 @@ export default function Navbar({ onOpenTermin }: NavbarProps) {
               </Link>
             )
           })}
-          <TerminModal />
+          <Link
+            href="/termin"
+            className="font-sans text-sm font-semibold uppercase tracking-wider px-5 py-2.5 rounded-sm bg-primary text-primary-foreground border-2 border-primary transition-colors duration-200 hover:bg-accent hover:border-accent"
+          >
+            Termin buchen
+          </Link>
         </nav>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-foreground p-1 cursor-pointer"
+          className="md:hidden text-foreground p-1 cursor-pointer flex-shrink-0"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
           aria-expanded={open}
@@ -174,9 +181,13 @@ export default function Navbar({ onOpenTermin }: NavbarProps) {
               </Link>
             )
           })}
-          <div className="mt-4">
-            <TerminModal />
-          </div>
+          <Link
+            href="/termin"
+            onClick={() => setOpen(false)}
+            className="mt-4 text-center font-sans text-sm font-semibold uppercase tracking-wider px-5 py-3 rounded-sm bg-primary text-primary-foreground border-2 border-primary transition-colors duration-200 hover:bg-accent hover:border-accent"
+          >
+            Termin buchen
+          </Link>
         </nav>
       </div>
     </header>

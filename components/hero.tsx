@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import Link from 'next/link'
 
 const images = [
   { src: '/hero-flek.jpg',   alt: 'Flek die Friseure – Team' },
@@ -12,11 +13,7 @@ const images = [
 const INTERVAL = 5000
 
 
-interface HeroProps {
-  onOpenTermin?: () => void
-}
-
-export default function Hero({ onOpenTermin }: HeroProps) {
+export default function Hero() {
   const [visible, setVisible] = useState(false)
   const [current, setCurrent] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -112,9 +109,9 @@ export default function Hero({ onOpenTermin }: HeroProps) {
             Ihr Friseursalon in Riederich – für Schnitte, Farben und Styling, die zu Ihnen passen.
           </p>
           <div className="flex flex-col gap-3 mb-6">
-            <button onClick={onOpenTermin} className="bg-primary text-primary-foreground px-6 py-3 font-sans text-sm uppercase tracking-wider hover:bg-accent transition-colors duration-300 cursor-pointer">
+            <Link href="/termin" className="bg-primary text-primary-foreground px-6 py-3 font-sans text-sm uppercase tracking-wider hover:bg-accent transition-colors duration-300 text-center">
               Termin vereinbaren
-            </button>
+            </Link>
             <a href="#leistungen" className="border border-white/40 text-white px-6 py-3 font-sans text-sm uppercase tracking-wider hover:bg-white/10 transition-colors duration-300">
               Unsere Leistungen
             </a>
@@ -163,12 +160,12 @@ export default function Hero({ onOpenTermin }: HeroProps) {
                   Flek die Friseure
                 </h1>
                 <div className="flex gap-3">
-                  <button
-                    onClick={onOpenTermin}
-                    className="bg-primary text-primary-foreground px-7 py-3 font-sans text-sm uppercase tracking-wider hover:bg-accent transition-colors duration-300 cursor-pointer"
+                  <Link
+                    href="/termin"
+                    className="bg-primary text-primary-foreground px-7 py-3 font-sans text-sm uppercase tracking-wider hover:bg-accent transition-colors duration-300"
                   >
                     Termin vereinbaren
-                  </button>
+                  </Link>
                   <a
                     href="#leistungen"
                     className="border border-white/50 text-white px-7 py-3 font-sans text-sm uppercase tracking-wider hover:bg-white/15 transition-colors duration-300"

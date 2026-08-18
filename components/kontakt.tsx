@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react'
-import TerminModal from './termin-modal'
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null)
@@ -128,7 +128,12 @@ export default function Kontakt() {
               <p className="font-sans text-primary-foreground/80 text-sm leading-relaxed mb-4">
                 Rufen Sie uns an oder schreiben Sie uns eine E-Mail. Wir freuen uns auf Sie!
               </p>
-              <TerminModal />
+              <Link
+                href="/termin"
+                className="inline-flex font-sans text-sm font-semibold uppercase tracking-wider px-5 py-2.5 rounded-sm bg-background text-foreground border-2 border-background transition-colors duration-200 hover:bg-accent hover:border-accent hover:text-accent-foreground"
+              >
+                Termin buchen
+              </Link>
             </div>
           </div>
 
