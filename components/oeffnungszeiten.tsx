@@ -57,16 +57,26 @@ function getLiveStatus(): StatusResult {
   return { isOpen, todayTag, nextOpenDay, progressPct }
 }
 
+const INITIAL_STATUS: StatusResult = {
+  isOpen: false,
+  todayTag: 'Montag',
+  nextOpenDay: null,
+  progressPct: 0,
+}
+
 export default function Oeffnungszeiten() {
-  const [status, setStatus] = useState<StatusResult>(() => getLiveStatus())
+  const [status, setStatus] = useState<StatusResult>(INITIAL_STATUS)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+    setStatus(getLiveStatus())
     const id = setInterval(() => setStatus(getLiveStatus()), 60_000)
     return () => clearInterval(id)
   }, [])
 
   const { isOpen, todayTag, nextOpenDay, progressPct } = status
-  const todayRow = zeiten.find((z) => z.tag === todayTag)
+  const todayRow = zeiten.find((z) => z.tag === (mounted ? todayTag : zeiten[0].tag))
 
   return (
     <section id="oeffnungszeiten" className="py-24 px-6 bg-secondary">
